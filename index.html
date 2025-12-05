@@ -5,195 +5,422 @@
   <title>Humberside Scouts – Safety Audit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --border: #e5e7eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --danger: #b91c1c;
+      --success: #166534;
+      --radius-card: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d4ed8 0, #020617 55%, #020617 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
       padding: 1.5rem;
-      background: #f5f5f5;
     }
+
     .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 1.5rem 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    h1, h2 {
-      color: #333;
-    }
-    fieldset {
-      border: 1px solid #ddd;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1.2rem;
-      border-radius: 6px;
-    }
-    legend {
-      font-weight: 600;
-      padding: 0 0.3rem;
-    }
-    .question {
-      margin: 0.8rem 0;
-    }
-    .options {
-      margin-top: 0.3rem;
-    }
-    .options label {
-      margin-right: 1rem;
-    }
-    .followup {
-      margin-top: 0.4rem;
-      display: none;
-    }
-    textarea {
       width: 100%;
-      min-height: 70px;
-      resize: vertical;
+      max-width: 960px;
+      background: radial-gradient(circle at top left, #eff6ff 0, #ffffff 55%);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.35),
+        0 0 0 1px rgba(148, 163, 184, 0.2);
+      padding: 1.75rem 2rem 2.25rem;
     }
-    label span.required {
-      color: #c00;
-      margin-left: 0.2rem;
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 1.2rem 1.2rem 1.75rem;
+        border-radius: 12px;
+      }
     }
-    .note {
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.7rem;
+      color: #020617;
+    }
+
+    .subtitle {
+      margin: 0;
       font-size: 0.9rem;
-      color: #555;
-      background: #f0f7ff;
-      border-left: 4px solid #1d4ed8;
-      padding: 0.8rem 1rem;
-      margin-bottom: 1rem;
-      border-radius: 4px;
+      color: var(--text-muted);
+      max-width: 640px;
     }
-    .btn {
-      display: inline-block;
-      background: #2563eb;
-      color: #fff;
-      padding: 0.6rem 1.4rem;
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
       border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
+      background: rgba(37, 99, 235, 0.08);
+      color: #1e40af;
+      border: 1px solid rgba(191, 219, 254, 0.8);
     }
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: default;
-    }
-    .status {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-    }
-    .status.success {
-      color: #166534;
-    }
-    .status.error {
-      color: #b91c1c;
-    }
-    .small {
+
+    .note {
       font-size: 0.85rem;
-      color: #666;
+      color: var(--text-muted);
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 0.7rem 0.9rem;
+      border-radius: 7px;
+      margin-bottom: 1rem;
     }
-    .two-col {
+
+    .note strong {
+      color: #1e3a8a;
+    }
+
+    form {
+      margin-top: 0.75rem;
+    }
+
+    .section-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      padding: 1.1rem 1.25rem 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .section-pill {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      color: #4b5563;
+      white-space: nowrap;
+    }
+
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: 0.75rem 1.25rem;
     }
-    @media (max-width: 700px) {
-      .two-col {
+
+    @media (max-width: 720px) {
+      .grid-2 {
         grid-template-columns: 1fr;
       }
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #111827;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    input[type="date"],
+    textarea {
+      width: 100%;
+      margin-top: 0.25rem;
+      padding: 0.5rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font: inherit;
+      color: #111827;
+      background-color: #ffffff;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .required {
+      color: #b91c1c;
+      margin-left: 0.12rem;
+    }
+
+    .question {
+      padding: 0.55rem 0.55rem 0.7rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      margin-bottom: 0.35rem;
+    }
+
+    .question:nth-child(odd) {
+      background: #f9fafb;
+    }
+
+    .question-text {
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .options label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #374151;
+    }
+
+    .followup {
+      margin-top: 0.4rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #e5e7eb;
+      display: none;
+    }
+
+    .followup-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-note {
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .actions {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px dashed #d1d5db;
+    }
+
+    .status {
+      font-size: 0.85rem;
+    }
+
+    .status.success {
+      color: var(--success);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .question.error-state {
+      border-color: rgba(248, 113, 113, 0.9);
+      background: #fef2f2;
+    }
+
+    .error-inline {
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+      color: var(--danger);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Humberside Scouts – Safety Audit</h1>
-    <p class="note">
-      <strong>Branching logic:</strong> Each question is answered with <em>Yes</em>, <em>No</em>,
-      or <em>Partially</em>. If you choose <em>No</em> or <em>Partially</em>, you must enter a
-      free-text explanation and a date by which you expect the issue to be fully resolved
-      (i.e. brought up to <em>Yes</em>).
-    </p>
-
-    <form id="auditForm">
-      <!-- SECTION 1: Basic details -->
-      <fieldset>
-        <legend>Section 1 — Basic Details</legend>
-
-        <div class="two-col">
-          <div>
-            <label>
-              Name <span class="required">*</span><br />
-              <input type="text" name="name" required />
-            </label>
-          </div>
-          <div>
-            <label>
-              Email address <span class="required">*</span><br />
-              <input type="email" name="email" required />
-            </label>
-          </div>
+  <div class="page">
+    <div class="container">
+      <header>
+        <div class="eyebrow">Humberside Scouts</div>
+        <h1>Section Safety Audit</h1>
+        <p class="subtitle">
+          Complete this audit to confirm that your section meetings, activities and visits are being delivered safely and in line with current expectations.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Section safety</span>
+          <span class="tag">Leaders in charge</span>
+          <span class="tag">Meetings & activities</span>
         </div>
+      </header>
 
-        <div class="two-col" style="margin-top:0.8rem;">
-          <div>
+      <div class="note">
+        <strong>Branching logic:</strong> Each question is answered with <em>Yes</em>, <em>No</em> or <em>Partially</em>.
+        If you select <em>No</em> or <em>Partially</em> you must enter a short explanation and a date by which you expect
+        the issue to be fully resolved (brought up to <em>Yes</em>). The audit cannot be submitted until every question is answered.
+      </div>
+
+      <form id="auditForm" novalidate>
+        <!-- SECTION 1: Basic details -->
+        <section class="section-card">
+          <div class="section-header">
+            <div class="section-title">Section 1 — Basic Details</div>
+            <div class="section-pill">About you & your section</div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label>
+                Name <span class="required">*</span>
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+            </div>
+            <div>
+              <label>
+                Email address <span class="required">*</span>
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top:0.75rem;">
+            <div>
+              <label>
+                District <span class="required">*</span>
+                <select name="district" required>
+                  <option value="">-- Please select --</option>
+                  <option>Beverley and Hornsea</option>
+                  <option>Blacktoft Beacon</option>
+                  <option>City of Hull</option>
+                  <option>Grimsby and Cleethorpes</option>
+                  <option>North Lincolnshire</option>
+                  <option>South Holderness</option>
+                  <option>Wolds and Coast</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                Group <span class="required">*</span>
+                <input type="text" name="group" required />
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top:0.75rem;">
             <label>
-              District <span class="required">*</span><br />
-              <select name="district" required>
-                <option value="">-- Please select --</option>
-                <option>Beverley and Hornsea</option>
-                <option>Blacktoft Beacon</option>
-                <option>City of Hull</option>
-                <option>Grimsby and Cleethorpes</option>
-                <option>North Lincolnshire</option>
-                <option>South Holderness</option>
-                <option>Wolds and Coast</option>
-              </select>
+              Section <span class="required">*</span>
+              <input type="text" name="section" placeholder="e.g. 1st Anytown Cubs" required />
             </label>
           </div>
-          <div>
-            <label>
-              Group <span class="required">*</span><br />
-              <input type="text" name="group" required />
-            </label>
+        </section>
+
+        <!-- Section shells for questions -->
+        <section class="section-card" id="section2">
+          <div class="section-header">
+            <div class="section-title">Section 2 — Section Meetings, Games, Activities and Visits</div>
+            <div class="section-pill">Operational safety</div>
           </div>
+          <div class="section-body"></div>
+        </section>
+
+        <section class="section-card" id="section3">
+          <div class="section-header">
+            <div class="section-title">Section 3 — Leader in Charge</div>
+            <div class="section-pill">Leadership & roles</div>
+          </div>
+          <div class="section-body"></div>
+        </section>
+
+        <section class="section-card" id="section4">
+          <div class="section-header">
+            <div class="section-title">Section 4 — Safety Always on the Agenda</div>
+            <div class="section-pill">Culture & follow-up</div>
+          </div>
+          <div class="section-body"></div>
+        </section>
+
+        <p class="footer-note">
+          By submitting, you confirm that the information recorded is accurate to the best of your knowledge at the time of completion.
+        </p>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            Submit audit
+          </button>
+          <span class="status" id="status" aria-live="polite"></span>
         </div>
-
-        <div style="margin-top:0.8rem;">
-          <label>
-            Section <span class="required">*</span><br />
-            <input type="text" name="section" required />
-          </label>
-        </div>
-      </fieldset>
-
-      <!-- Helper component: question block -->
-      <!-- We will generate this via JS from a config array -->
-
-      <fieldset id="section2">
-        <legend>Section 2 — Section Meetings, Games, Activities and Visits</legend>
-        <!-- Questions injected here by JS -->
-      </fieldset>
-
-      <fieldset id="section3">
-        <legend>Section 3 — Leader in Charge</legend>
-        <!-- Questions injected here by JS -->
-      </fieldset>
-
-      <fieldset id="section4">
-        <legend>Section 4 — Safety Always on the Agenda</legend>
-        <!-- Questions injected here by JS -->
-      </fieldset>
-
-      <p class="small">
-        By submitting, you confirm that the information recorded is accurate to the best of your knowledge.
-      </p>
-
-      <button type="submit" class="btn" id="submitBtn">Submit audit</button>
-      <div id="status" class="status" aria-live="polite"></div>
-    </form>
+      </form>
+    </div>
   </div>
 
   <script>
-    // === CONFIG: list of questions ==========================
+    // ---------- CONFIG: Questions ----------
     const questionSections = {
       section2: [
         "All leaders and adult helpers regularly attending section meetings have undertaken the appropriate enquiries (DBS/AAC/Welcome Conversations).",
@@ -230,9 +457,10 @@
       wrapper.className = "question";
       wrapper.dataset.questionId = id;
 
-      const label = document.createElement("label");
-      label.innerHTML = text + ' <span class="required">*</span>';
-      wrapper.appendChild(label);
+      const textDiv = document.createElement("div");
+      textDiv.className = "question-text";
+      textDiv.innerHTML = text + ' <span class="required">*</span>';
+      wrapper.appendChild(textDiv);
 
       const optionsDiv = document.createElement("div");
       optionsDiv.className = "options";
@@ -248,7 +476,7 @@
         radio.id = choiceId;
         radio.required = true;
         radioLabel.appendChild(radio);
-        radioLabel.appendChild(document.createTextNode(" " + choice));
+        radioLabel.appendChild(document.createTextNode(choice));
         optionsDiv.appendChild(radioLabel);
       });
 
@@ -257,19 +485,24 @@
       const followUpDiv = document.createElement("div");
       followUpDiv.className = "followup";
       followUpDiv.innerHTML = `
-        <div class="small">
+        <div class="followup-text">
           Please explain why this is <strong>No</strong> or <strong>Partially</strong>, and give a date by which you expect it to be fully resolved (brought up to “Yes”).
         </div>
         <textarea name="${id}_reason" placeholder="Reason and planned resolution date..."></textarea>
       `;
       wrapper.appendChild(followUpDiv);
 
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "error-inline";
+      errorDiv.style.display = "none";
+      wrapper.appendChild(errorDiv);
+
       return wrapper;
     }
 
     function renderQuestions() {
       Object.entries(questionSections).forEach(([sectionId, questions]) => {
-        const sectionEl = document.getElementById(sectionId);
+        const sectionEl = document.querySelector(`#${sectionId} .section-body`);
         questions.forEach((qText, index) => {
           const qId = sectionId + "_q" + (index + 1);
           const el = createQuestionElement(qId, qText);
@@ -285,18 +518,56 @@
           const questionDiv = document.querySelector('.question[data-question-id="' + name + '"]');
           if (!questionDiv) return;
           const followUp = questionDiv.querySelector(".followup");
-          if (!followUp) return;
+          const textarea = followUp.querySelector("textarea");
+          const errorDiv = questionDiv.querySelector(".error-inline");
+          questionDiv.classList.remove("error-state");
+          errorDiv.style.display = "none";
 
           if (e.target.value === "no" || e.target.value === "partially") {
             followUp.style.display = "block";
-            followUp.querySelector("textarea").required = true;
+            textarea.required = true;
           } else {
             followUp.style.display = "none";
-            followUp.querySelector("textarea").required = false;
-            followUp.querySelector("textarea").value = "";
+            textarea.required = false;
+            textarea.value = "";
           }
         }
       });
+    }
+
+    function validateAllQuestions() {
+      const questions = document.querySelectorAll(".question");
+      let firstProblem = null;
+
+      questions.forEach(q => {
+        q.classList.remove("error-state");
+        const errorDiv = q.querySelector(".error-inline");
+        errorDiv.style.display = "none";
+        errorDiv.textContent = "";
+
+        const radios = q.querySelectorAll('input[type="radio"]');
+        const selected = Array.from(radios).find(r => r.checked);
+
+        if (!selected) {
+          if (!firstProblem) firstProblem = q;
+          q.classList.add("error-state");
+          errorDiv.style.display = "block";
+          errorDiv.textContent = "Please select Yes, No or Partially.";
+          return;
+        }
+
+        if (selected.value === "no" || selected.value === "partially") {
+          const textarea = q.querySelector("textarea");
+          if (!textarea.value.trim()) {
+            if (!firstProblem) firstProblem = q;
+            q.classList.add("error-state");
+            errorDiv.style.display = "block";
+            errorDiv.textContent = "Please add a brief explanation and planned resolution date.";
+          }
+        }
+      });
+
+      return firstProblem;
     }
 
     async function handleSubmit(event) {
@@ -308,13 +579,23 @@
       statusEl.textContent = "";
       statusEl.className = "status";
 
+      // Basic HTML5 validation for text / email / selects
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
+      // Strong explicit validation for every question
+      const firstProblem = validateAllQuestions();
+      if (firstProblem) {
+        statusEl.textContent = "Please answer every question and complete all required explanation boxes.";
+        statusEl.classList.add("error");
+        firstProblem.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
       submitBtn.disabled = true;
-      submitBtn.textContent = "Submitting...";
+      submitBtn.textContent = "Submitting…";
 
       const formData = new FormData(form);
       const payload = {};
@@ -323,29 +604,30 @@
         payload[key] = value;
       });
 
-      // Add a timestamp client-side
       payload.submittedAt = new Date().toISOString();
 
       try {
         const response = await fetch("YOUR_FLOW_URL_HERE", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-          throw new Error("Non-200 response");
-        }
+        if (!response.ok) throw new Error("Non-200 response");
 
         statusEl.textContent = "Submitted successfully. Thank you.";
         statusEl.classList.add("success");
         form.reset();
 
-        // Hide any follow-up boxes that might still be visible
+        // Reset follow-up visibility and error states
         document.querySelectorAll(".followup").forEach(div => {
           div.style.display = "none";
+        });
+        document.querySelectorAll(".question").forEach(q => {
+          q.classList.remove("error-state");
+          const errorDiv = q.querySelector(".error-inline");
+          errorDiv.style.display = "none";
+          errorDiv.textContent = "";
         });
       } catch (err) {
         console.error(err);
@@ -357,7 +639,7 @@
       }
     }
 
-    // Initialise
+    // Init
     renderQuestions();
     setupBranching();
     document.getElementById("auditForm").addEventListener("submit", handleSubmit);
